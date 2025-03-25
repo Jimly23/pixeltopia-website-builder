@@ -59,18 +59,18 @@ const HowItWorks: React.FC = () => {
           <h3 className="text-2xl font-semibold text-center mb-12">For Employers</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 relative">
-            {/* Arrow connectors (only visible on desktop) */}
+            {/* Arrow connectors (only visible on desktop) - Changed to orange */}
             <div className="hidden md:flex absolute top-1/3 left-1/3 transform -translate-y-1/2 -translate-x-1/2">
-              <ArrowRight size={28} className="text-found-blue" />
+              <ArrowRight size={28} className="text-orange-500" />
             </div>
             <div className="hidden md:flex absolute top-1/3 left-2/3 transform -translate-y-1/2 -translate-x-1/2">
-              <ArrowRight size={28} className="text-found-blue" />
+              <ArrowRight size={28} className="text-orange-500" />
             </div>
             
-            {/* Step 1 */}
+            {/* Step 1 - Changed icon color to orange */}
             <div className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-found-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <div className="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-orange-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M2 7v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4.586a1 1 0 0 1-.707-.293L13 3H5a2 2 0 0 0-2 2zm10.5 2.5V15M9 12h7"/>
                 </svg>
               </div>
@@ -78,10 +78,10 @@ const HowItWorks: React.FC = () => {
               <p className="text-gray-600 text-sm">AI assists in writing job descriptions</p>
             </div>
             
-            {/* Step 2 */}
+            {/* Step 2 - Changed icon color to orange */}
             <div className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-found-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <div className="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-orange-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M2 4v16a2 2 0 0 0 2 2h4.586a1 1 0 0 0 .707-.293L12 19h8a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2.586a1 1 0 0 1-.707-.293L15 3H4a2 2 0 0 0-2 1z"/>
                   <path d="M6 15l6-6 6 6"/>
                 </svg>
@@ -90,10 +90,10 @@ const HowItWorks: React.FC = () => {
               <p className="text-gray-600 text-sm">AI ranks and filters candidates</p>
             </div>
             
-            {/* Step 3 */}
+            {/* Step 3 - Changed icon color to orange */}
             <div className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-found-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <div className="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-orange-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect width="8" height="8" x="2" y="2" rx="2"/>
                   <rect width="8" height="8" x="14" y="2" rx="2"/>
                   <rect width="8" height="8" x="2" y="14" rx="2"/>
