@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Users, Clipboard, ChevronRight, BarChart3 } from 'lucide-react';
+import { Users, Clipboard, BarChart3, ArrowRight } from 'lucide-react';
 
 const HowItWorks: React.FC = () => {
   return (
@@ -14,46 +14,42 @@ const HowItWorks: React.FC = () => {
         <div className="mb-20">
           <h3 className="text-2xl font-semibold text-center mb-12">For Job Seekers</h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 relative">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 relative">
             {/* Arrow connectors (only visible on desktop) */}
-            <div className="hidden md:block absolute top-1/2 left-1/3 transform -translate-y-1/2 -translate-x-1/2">
-              <ChevronRight size={32} className="text-found-blue" />
+            <div className="hidden md:flex absolute top-1/3 left-1/3 transform -translate-y-1/2 -translate-x-1/2">
+              <ArrowRight size={28} className="text-found-blue" />
             </div>
-            <div className="hidden md:block absolute top-1/2 left-2/3 transform -translate-y-1/2 -translate-x-1/2">
-              <ChevronRight size={32} className="text-found-blue" />
+            <div className="hidden md:flex absolute top-1/3 left-2/3 transform -translate-y-1/2 -translate-x-1/2">
+              <ArrowRight size={28} className="text-found-blue" />
             </div>
             
             {/* Step 1 */}
-            <div className="step-card">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-4">
-                  <Users className="w-7 h-7 text-found-blue" />
-                </div>
-                <h4 className="text-lg font-semibold mb-2">Create Profile</h4>
-                <p className="text-gray-600 text-sm">AI analyzes your skills and experience</p>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                <Users className="w-8 h-8 text-found-blue" />
               </div>
+              <h4 className="text-lg font-semibold mb-2">Create Profile</h4>
+              <p className="text-gray-600 text-sm">AI analyzes your skills and experience</p>
             </div>
             
             {/* Step 2 */}
-            <div className="step-card">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-4">
-                  <Clipboard className="w-7 h-7 text-found-blue" />
-                </div>
-                <h4 className="text-lg font-semibold mb-2">Get Matched</h4>
-                <p className="text-gray-600 text-sm">Receive personalized job recommendations</p>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-found-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 4v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2zm-8 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm-7-7h14M5 7h14"/>
+                </svg>
               </div>
+              <h4 className="text-lg font-semibold mb-2">Get Matched</h4>
+              <p className="text-gray-600 text-sm">Receive personalized job recommendations</p>
             </div>
             
             {/* Step 3 */}
-            <div className="step-card">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-4">
-                  <BarChart3 className="w-7 h-7 text-found-blue" />
-                </div>
-                <h4 className="text-lg font-semibold mb-2">Apply & Track</h4>
-                <p className="text-gray-600 text-sm">Manage applications in your dashboard</p>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                <BarChart3 className="w-8 h-8 text-found-blue" />
               </div>
+              <h4 className="text-lg font-semibold mb-2">Apply & Track</h4>
+              <p className="text-gray-600 text-sm">Manage applications in your dashboard</p>
             </div>
           </div>
         </div>
@@ -62,63 +58,51 @@ const HowItWorks: React.FC = () => {
         <div>
           <h3 className="text-2xl font-semibold text-center mb-12">For Employers</h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 relative">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 relative">
             {/* Arrow connectors (only visible on desktop) */}
-            <div className="hidden md:block absolute top-1/2 left-1/3 transform -translate-y-1/2 -translate-x-1/2">
-              <ChevronRight size={32} className="text-found-blue" />
+            <div className="hidden md:flex absolute top-1/3 left-1/3 transform -translate-y-1/2 -translate-x-1/2">
+              <ArrowRight size={28} className="text-found-blue" />
             </div>
-            <div className="hidden md:block absolute top-1/2 left-2/3 transform -translate-y-1/2 -translate-x-1/2">
-              <ChevronRight size={32} className="text-found-blue" />
+            <div className="hidden md:flex absolute top-1/3 left-2/3 transform -translate-y-1/2 -translate-x-1/2">
+              <ArrowRight size={28} className="text-found-blue" />
             </div>
             
             {/* Step 1 */}
-            <div className="step-card">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-found-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
-                    <polyline points="7.5 4.21 12 6.81 16.5 4.21" />
-                    <polyline points="7.5 19.79 7.5 14.6 3 12" />
-                    <polyline points="21 12 16.5 14.6 16.5 19.79" />
-                    <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                    <line x1="12" y1="22.08" x2="12" y2="12" />
-                  </svg>
-                </div>
-                <h4 className="text-lg font-semibold mb-2">Post a Job</h4>
-                <p className="text-gray-600 text-sm">AI assists in writing job descriptions</p>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-found-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M2 7v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4.586a1 1 0 0 1-.707-.293L13 3H5a2 2 0 0 0-2 2zm10.5 2.5V15M9 12h7"/>
+                </svg>
               </div>
+              <h4 className="text-lg font-semibold mb-2">Post a Job</h4>
+              <p className="text-gray-600 text-sm">AI assists in writing job descriptions</p>
             </div>
             
             {/* Step 2 */}
-            <div className="step-card">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-found-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M19.6 3.2l1.6-1.6M2.8 20.4l1.6-1.6M6.4 3.2l-1.6-1.6M21.2.8l-6.4 6.4" />
-                    <path d="M14 7.8A6 6 0 004 16a4.83 4.83 0 004.8 5.6h0a4.83 4.83 0 005.6-4.8A6 6 0 0014 7.8z" />
-                    <path d="M17.6 20.4l1.6 1.6" />
-                  </svg>
-                </div>
-                <h4 className="text-lg font-semibold mb-2">Screen Automatically</h4>
-                <p className="text-gray-600 text-sm">AI ranks and filters candidates</p>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-found-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M2 4v16a2 2 0 0 0 2 2h4.586a1 1 0 0 0 .707-.293L12 19h8a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2.586a1 1 0 0 1-.707-.293L15 3H4a2 2 0 0 0-2 1z"/>
+                  <path d="M6 15l6-6 6 6"/>
+                </svg>
               </div>
+              <h4 className="text-lg font-semibold mb-2">Screen Automatically</h4>
+              <p className="text-gray-600 text-sm">AI ranks and filters candidates</p>
             </div>
             
             {/* Step 3 */}
-            <div className="step-card">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-found-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
-                    <line x1="16" x2="16" y1="2" y2="6" />
-                    <line x1="8" x2="8" y1="2" y2="6" />
-                    <line x1="3" x2="21" y1="10" y2="10" />
-                    <path d="m9 16 2 2 4-4" />
-                  </svg>
-                </div>
-                <h4 className="text-lg font-semibold mb-2">Interview & Hire</h4>
-                <p className="text-gray-600 text-sm">Complete hiring with built-in tools</p>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-found-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect width="8" height="8" x="2" y="2" rx="2"/>
+                  <rect width="8" height="8" x="14" y="2" rx="2"/>
+                  <rect width="8" height="8" x="2" y="14" rx="2"/>
+                  <rect width="8" height="8" x="14" y="14" rx="2"/>
+                  <path d="M8 6h.01M16 6h.01M8 18h.01M16 18h.01"/>
+                </svg>
               </div>
+              <h4 className="text-lg font-semibold mb-2">Interview & Hire</h4>
+              <p className="text-gray-600 text-sm">Complete hiring with built-in tools</p>
             </div>
           </div>
         </div>
