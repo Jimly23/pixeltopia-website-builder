@@ -26,12 +26,6 @@ const Hero: React.FC = () => {
             Get In Touch
           </Button>
         </div>
-        
-        <div className="mt-16 animate-fade-in-up" style={{animationDelay: '0.4s'}}>
-          <div className="mx-auto w-8 h-12 border-2 border-gray-300 rounded-full flex items-start justify-center">
-            <span className="block w-1 h-2 bg-gray-400 rounded-full mt-2 animate-bounce"></span>
-          </div>
-        </div>
       </div>
     </section>
   );

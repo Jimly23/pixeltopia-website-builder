@@ -77,7 +77,7 @@ const Testimonials: React.FC = () => {
             <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft" className="h-8" />
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" className="h-8" />
             <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Amazon_icon.svg" alt="Amazon" className="h-8" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Meta_Platforms_Inc._logo.svg" alt="Meta" className="h-8" />
+            <img src="https://pngimg.com/d/meta_PNG12.png" alt="Meta" className="h-16" />
           </div>
         </div>
       </div>

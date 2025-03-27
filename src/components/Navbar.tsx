@@ -27,30 +27,8 @@ const Navbar: React.FC = () => {
         </Link>
         
         <div className="hidden md:flex items-center space-x-6">
-          <div className="group relative">
-            <button className="flex items-center space-x-1 text-gray-600 hover:text-found-blue transition-colors">
-              <span>For Job Seekers</span>
-              <ChevronDown size={16} />
-            </button>
-            <div className="absolute hidden group-hover:block bg-white shadow-lg rounded-md p-3 w-48 mt-1">
-              <a href="#" className="block py-2 px-3 hover:bg-gray-50 rounded-md">Find Jobs</a>
-              <a href="#" className="block py-2 px-3 hover:bg-gray-50 rounded-md">Resume Builder</a>
-              <a href="#" className="block py-2 px-3 hover:bg-gray-50 rounded-md">Career Advice</a>
-            </div>
-          </div>
-          
-          <div className="group relative">
-            <button className="flex items-center space-x-1 text-gray-600 hover:text-found-blue transition-colors">
-              <span>For Employers</span>
-              <ChevronDown size={16} />
-            </button>
-            <div className="absolute hidden group-hover:block bg-white shadow-lg rounded-md p-3 w-48 mt-1">
-              <a href="#" className="block py-2 px-3 hover:bg-gray-50 rounded-md">Post a Job</a>
-              <a href="#" className="block py-2 px-3 hover:bg-gray-50 rounded-md">Talent Search</a>
-              <a href="#" className="block py-2 px-3 hover:bg-gray-50 rounded-md">Pricing</a>
-            </div>
-          </div>
-          
+          <a href="#" className="text-gray-600 hover:text-found-blue transition-colors">For Job Seekers</a>
+          <a href="#" className="text-gray-600 hover:text-found-blue transition-colors">For Employers</a>
           <a href="#" className="text-gray-600 hover:text-found-blue transition-colors">About Us</a>
           <a href="#" className="text-gray-600 hover:text-found-blue transition-colors">Contact</a>
         </div>

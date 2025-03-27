@@ -45,7 +45,7 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm mb-4 md:mb-0">© 2023 Found It. All rights reserved.</p>
+          <p className="text-gray-400 text-sm mb-4 md:mb-0">© 2025 Found It. All rights reserved.</p>
           
           <div className="flex space-x-4">
             <a href="#" className="text-gray-400 hover:text-white transition-colors">
