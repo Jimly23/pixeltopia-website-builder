@@ -31,6 +31,7 @@ const Navbar: React.FC = () => {
           <a href="#" className="text-gray-600 hover:text-found-blue transition-colors">For Employers</a>
           <a href="#" className="text-gray-600 hover:text-found-blue transition-colors">About Us</a>
           <a href="#" className="text-gray-600 hover:text-found-blue transition-colors">Contact</a>
+          <Link to="/admin" className="text-gray-600 hover:text-found-blue transition-colors">Admin</Link>
         </div>
         
         <div className="flex items-center space-x-3">
