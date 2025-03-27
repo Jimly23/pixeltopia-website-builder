@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ChevronDown } from 'lucide-react';
 
@@ -7,7 +8,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-white py-4 px-8 md:px-12 shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="flex items-center space-x-2">
+        <Link to="/" className="flex items-center space-x-2">
           <div className="bg-found-blue text-white p-1 rounded">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
@@ -23,7 +24,7 @@ const Navbar: React.FC = () => {
             <h1 className="font-bold text-xl text-gray-800">Found It</h1>
             <p className="text-[10px] text-gray-500 -mt-1">Career Clarity. Superior Growth.</p>
           </div>
-        </div>
+        </Link>
         
         <div className="hidden md:flex items-center space-x-6">
           <div className="group relative">
@@ -55,8 +56,10 @@ const Navbar: React.FC = () => {
         </div>
         
         <div className="flex items-center space-x-3">
-          <a href="#" className="text-gray-600 hover:text-found-blue font-medium hidden md:block">Log In</a>
-          <Button className="bg-found-blue hover:bg-found-blue-dark transition-colors">Sign Up</Button>
+          <Link to="/login" className="text-gray-600 hover:text-found-blue font-medium hidden md:block">Log In</Link>
+          <Link to="/signup">
+            <Button className="bg-found-blue hover:bg-found-blue-dark transition-colors">Sign Up</Button>
+          </Link>
         </div>
       </div>
     </nav>
