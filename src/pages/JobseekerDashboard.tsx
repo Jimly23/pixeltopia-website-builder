@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,13 +12,14 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { BriefcaseBusiness, FileText, Award, Star, ArrowRight, Search, FileUp } from "lucide-react";
+import { BriefcaseBusiness, FileText, Award, Star, ArrowRight, Search, FileUp, Mic } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { JobSeekerProfileForm } from "@/components/JobSeekerProfileForm";
 import { RecommendationCard } from "@/components/RecommendationCard";
 import { JobRoadmap } from "@/components/JobRoadmap";
 import { CourseRecommendations } from "@/components/CourseRecommendations";
 import { BrandingTips } from "@/components/BrandingTips";
+import { InterviewSimulator } from "@/components/InterviewSimulator";
 
 const JobseekerDashboard = () => {
   const [activeTab, setActiveTab] = useState("profile");
@@ -86,11 +86,17 @@ const JobseekerDashboard = () => {
           onValueChange={setActiveTab}
           className="space-y-6"
         >
-          <TabsList className="grid grid-cols-4 md:w-[600px]">
+          <TabsList className="grid grid-cols-5 md:w-[750px]">
             <TabsTrigger value="profile">Profile</TabsTrigger>
             <TabsTrigger value="jobs">Jobs</TabsTrigger>
             <TabsTrigger value="learning">Learning</TabsTrigger>
             <TabsTrigger value="branding">Branding</TabsTrigger>
+            <TabsTrigger value="interview">
+              <span className="flex items-center">
+                <Mic className="mr-2 h-4 w-4" />
+                Interview
+              </span>
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="profile" className="space-y-6">
@@ -208,6 +214,29 @@ const JobseekerDashboard = () => {
               </Card>
             ) : (
               <BrandingTips />
+            )}
+          </TabsContent>
+
+          <TabsContent value="interview" className="space-y-6">
+            {!profileCompleted ? (
+              <Card>
+                <CardHeader>
+                  <CardTitle>Complete Your Profile First</CardTitle>
+                  <CardDescription>
+                    To access interview simulator, please complete your profile.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Button 
+                    className="bg-found-blue hover:bg-found-blue-dark"
+                    onClick={() => setActiveTab("profile")}
+                  >
+                    Go to Profile
+                  </Button>
+                </CardContent>
+              </Card>
+            ) : (
+              <InterviewSimulator />
             )}
           </TabsContent>
         </Tabs>
