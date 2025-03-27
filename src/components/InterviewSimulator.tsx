@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Mic, MicOff, Play, Stop, Replay, ArrowRight } from "lucide-react";
+import { Mic, MicOff, Play, Square, RotateCcw, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/components/ui/use-toast";
@@ -155,7 +155,7 @@ export function InterviewSimulator() {
                     className="flex items-center" 
                     onClick={handleStopRecording}
                   >
-                    <MicOff className="mr-2 h-4 w-4" />
+                    <Square className="mr-2 h-4 w-4" />
                     Stop Recording
                   </Button>
                 ) : (
@@ -175,7 +175,7 @@ export function InterviewSimulator() {
                   onClick={handleReplay}
                   disabled={isRecording}
                 >
-                  <Replay className="mr-2 h-4 w-4" />
+                  <RotateCcw className="mr-2 h-4 w-4" />
                   Replay Question
                 </Button>
                 <Button 
