@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import AdminDashboard from "./pages/AdminDashboard";
 import JobseekerDashboard from "./pages/JobseekerDashboard";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -29,6 +30,11 @@ const App = () => (
             <Route path="/jobseeker" element={
               <ProtectedRoute>
                 <JobseekerDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <Profile />
               </ProtectedRoute>
             } />
             <Route path="/admin/*" element={
