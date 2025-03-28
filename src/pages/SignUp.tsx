@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -18,6 +18,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { supabase } from '@/integrations/supabase/client';
+import { Loader2 } from 'lucide-react';
 
 const formSchema = z.object({
   firstName: z.string().min(2, { message: 'First name must be at least 2 characters.' }),
@@ -28,6 +30,10 @@ const formSchema = z.object({
 });
 
 const SignUp: React.FC = () => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [session, setSession] = useState(null);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,12 +45,119 @@ const SignUp: React.FC = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    // Here you would typically send the form data to your backend
-    toast.success('Account created! Redirecting to login...');
-    // Redirect would happen here after API response
+  useEffect(() => {
+    // Check if user is already signed in
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      if (session) {
+        navigate('/jobseeker');
+      }
+    });
+
+    // Set up auth state listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setSession(session);
+        if (session) {
+          navigate('/jobseeker');
+        }
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, [navigate]);
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      setLoading(true);
+      const { data, error } = await supabase.auth.signUp({
+        email: values.email,
+        password: values.password,
+        options: {
+          data: {
+            first_name: values.firstName,
+            last_name: values.lastName,
+            full_name: `${values.firstName} ${values.lastName}`,
+          },
+        },
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      if (data.user) {
+        toast.success('Account created successfully!');
+        // Add a slight delay to allow the success message to be seen
+        setTimeout(() => {
+          if (data.session) {
+            // Already logged in
+            navigate('/jobseeker');
+          } else {
+            // Email confirmation required
+            toast.info('Please check your email to confirm your account');
+            navigate('/login');
+          }
+        }, 1500);
+      }
+    } catch (error: any) {
+      console.error('Signup error:', error);
+      if (error.message.includes('already exists')) {
+        toast.error('An account with this email already exists. Please log in instead.');
+      } else {
+        toast.error(error.message || 'Failed to create account. Please try again.');
+      }
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const handleGoogleSignUp = async () => {
+    try {
+      setLoading(true);
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: window.location.origin,
+        },
+      });
+
+      if (error) {
+        throw error;
+      }
+    } catch (error: any) {
+      console.error('Google sign up error:', error);
+      toast.error(error.message || 'Failed to sign up with Google.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFacebookSignUp = async () => {
+    try {
+      setLoading(true);
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'facebook',
+        options: {
+          redirectTo: window.location.origin,
+        },
+      });
+
+      if (error) {
+        throw error;
+      }
+    } catch (error: any) {
+      console.error('Facebook sign up error:', error);
+      toast.error(error.message || 'Failed to sign up with Facebook.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // If already authenticated, don't show signup form
+  if (session) {
+    return null; // Or a loading spinner if preferred
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -145,8 +258,19 @@ const SignUp: React.FC = () => {
                 )}
               />
               
-              <Button type="submit" className="w-full bg-found-blue hover:bg-found-blue-dark">
-                Create Account
+              <Button 
+                type="submit" 
+                className="w-full bg-found-blue hover:bg-found-blue-dark"
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Creating Account...
+                  </>
+                ) : (
+                  'Create Account'
+                )}
               </Button>
             </form>
           </Form>
@@ -162,7 +286,12 @@ const SignUp: React.FC = () => {
             </div>
             
             <div className="mt-6 grid grid-cols-2 gap-3">
-              <Button variant="outline" className="w-full">
+              <Button 
+                variant="outline" 
+                className="w-full" 
+                onClick={handleGoogleSignUp}
+                disabled={loading}
+              >
                 <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                   <path
                     fill="currentColor"
@@ -184,7 +313,12 @@ const SignUp: React.FC = () => {
                 </svg>
                 Google
               </Button>
-              <Button variant="outline" className="w-full">
+              <Button 
+                variant="outline" 
+                className="w-full"
+                onClick={handleFacebookSignUp}
+                disabled={loading}
+              >
                 <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
                 </svg>
