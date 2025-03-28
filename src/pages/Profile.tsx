@@ -12,10 +12,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User, Settings, Lock, LogOut } from "lucide-react";
+import { toast } from "sonner";
 
 // Define the profile form schema using zod
 const profileFormSchema = z.object({
@@ -24,6 +24,7 @@ const profileFormSchema = z.object({
   location: z.string().optional(),
   bio: z.string().optional(),
   phoneNumber: z.string().optional(),
+  address: z.string().optional(),
 });
 
 // Define the password change schema
@@ -40,11 +41,10 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>;
 type PasswordChangeValues = z.infer<typeof passwordChangeSchema>;
 
 const ProfilePage = () => {
-  const { user, signOut } = useAuth();
+  const { user, userData, refreshUserData, signOut } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [profileData, setProfileData] = useState<ProfileFormValues | null>(null);
   const [activeTab, setActiveTab] = useState("profile");
 
   // Profile form setup
@@ -56,6 +56,7 @@ const ProfilePage = () => {
       location: "",
       bio: "",
       phoneNumber: "",
+      address: "",
     }
   });
 
@@ -69,55 +70,53 @@ const ProfilePage = () => {
     }
   });
 
-  // Fetch user profile data on component mount
+  // Update form when userData changes
   useEffect(() => {
-    if (user) {
-      // Initialize form with user data from auth
-      profileForm.setValue("email", user.email || "");
-      
-      // Set user metadata if available
-      if (user.user_metadata) {
-        if (user.user_metadata.full_name) {
-          profileForm.setValue("fullName", user.user_metadata.full_name);
-        }
-        if (user.user_metadata.location) {
-          profileForm.setValue("location", user.user_metadata.location);
-        }
-        if (user.user_metadata.bio) {
-          profileForm.setValue("bio", user.user_metadata.bio);
-        }
-        if (user.user_metadata.phone_number) {
-          profileForm.setValue("phoneNumber", user.user_metadata.phone_number);
-        }
-      }
-      
-      setProfileData({
-        fullName: user.user_metadata?.full_name || "",
-        email: user.email || "",
-        location: user.user_metadata?.location || "",
-        bio: user.user_metadata?.bio || "",
-        phoneNumber: user.user_metadata?.phone_number || "",
-      });
+    if (userData) {
+      profileForm.setValue("email", userData.email || "");
+      profileForm.setValue("fullName", userData.full_name || "");
+      profileForm.setValue("location", userData.address || "");
+      profileForm.setValue("bio", userData.bio || "");
+      profileForm.setValue("phoneNumber", userData.phone || "");
+      profileForm.setValue("address", userData.address || "");
     }
-  }, [user]);
+  }, [userData, profileForm]);
 
   // Handle profile update
   const onProfileSubmit = async (data: ProfileFormValues) => {
-    if (!user) return;
+    if (!user || !userData) return;
     
     setLoading(true);
     try {
-      const { error } = await supabase.auth.updateUser({
+      // First update auth user metadata
+      const { error: authError } = await supabase.auth.updateUser({
         email: data.email,
         data: {
           full_name: data.fullName,
-          location: data.location,
+          phone: data.phoneNumber,
+          address: data.address,
           bio: data.bio,
-          phone_number: data.phoneNumber,
         },
       });
 
-      if (error) throw error;
+      if (authError) throw authError;
+
+      // Then update the custom users table
+      const { error: dbError } = await supabase
+        .from('users')
+        .update({
+          full_name: data.fullName,
+          email: data.email,
+          phone: data.phoneNumber || '',
+          address: data.address || '',
+          bio: data.bio || '',
+        })
+        .eq('id', userData.id);
+
+      if (dbError) throw dbError;
+
+      // Refresh user data
+      await refreshUserData();
 
       toast({
         title: "Profile updated",
@@ -168,9 +167,9 @@ const ProfilePage = () => {
     navigate("/");
   };
 
-  // If user is not loaded yet, show loading
-  if (!user) {
-    return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
+  // If user data is not loaded yet, show loading
+  if (!userData) {
+    return <div className="flex items-center justify-center min-h-screen">Loading profile data...</div>;
   }
 
   return (
@@ -185,14 +184,14 @@ const ProfilePage = () => {
               <CardContent className="p-6">
                 <div className="flex flex-col items-center space-y-4">
                   <Avatar className="h-24 w-24">
-                    <AvatarImage src={user.user_metadata?.avatar_url || ""} alt={user.user_metadata?.full_name || "User"} />
+                    <AvatarImage src={userData.profile_picture || ""} alt={userData.full_name || "User"} />
                     <AvatarFallback className="text-2xl">
-                      {user.user_metadata?.full_name ? user.user_metadata.full_name.charAt(0).toUpperCase() : "U"}
+                      {userData.full_name ? userData.full_name.charAt(0).toUpperCase() : "U"}
                     </AvatarFallback>
                   </Avatar>
                   <div className="text-center">
-                    <h2 className="text-xl font-bold">{user.user_metadata?.full_name || "User"}</h2>
-                    <p className="text-gray-500">{user.email}</p>
+                    <h2 className="text-xl font-bold">{userData.full_name || "User"}</h2>
+                    <p className="text-gray-500">{userData.email}</p>
                   </div>
                   <div className="w-full border-t pt-4 mt-4">
                     <nav className="space-y-2">
@@ -285,12 +284,12 @@ const ProfilePage = () => {
                         
                         <FormField
                           control={profileForm.control}
-                          name="location"
+                          name="address"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Location</FormLabel>
+                              <FormLabel>Address</FormLabel>
                               <FormControl>
-                                <Input placeholder="City, Country" {...field} />
+                                <Input placeholder="Your address" {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
